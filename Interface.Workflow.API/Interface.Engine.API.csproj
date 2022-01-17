@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="EmailActivity.cs" />
     <Compile Include="IActivity.cs" />
+    <Compile Include="IWorkFlow.cs" />
     <Compile Include="UploadVideoActivity.cs" />
     <Compile Include="WebServiceActivity.cs" />
     <Compile Include="Workflow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkFlowEngine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

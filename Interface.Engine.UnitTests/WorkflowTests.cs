@@ -2,6 +2,7 @@ using NUnit.Framework;
 using NSubstitute;
 using Interface.Engine.API;
 using System;
+using System.Linq;
 
 namespace Interface.Engine.UnitTests
 {
@@ -13,28 +14,29 @@ namespace Interface.Engine.UnitTests
         }
 
         [Test]
-        public void Run_NoActivitiesProvided_ThrowsInvalidOperationException()
+        public void Add_AddOneActivity_ReturnsOneActivity()
         {
             var workflow = new Workflow();
+            var activity = Substitute.For<IActivity>();
 
-            Assert.Throws<InvalidOperationException>(() => workflow.Run());
+            workflow.Add(activity);
+
+            Assert.AreEqual(1, workflow.GetActivities().Count());
         }
 
         [Test]
-        public void Run_ActivityProvided_CallExecute()
+        public void Remove_AddTwoActivitiesAndRemoveOne_ReturnsOneActivity()
         {
+            var workflow = new Workflow();
             var activity = Substitute.For<IActivity>();
             var activity2 = Substitute.For<IActivity>();
 
-            var workFlow = new Workflow();
+            workflow.Add(activity);
+            workflow.Add(activity2);
 
-            workFlow.RegisterActivity(activity);
-            workFlow.RegisterActivity(activity2);
-            workFlow.Run();
+            workflow.Remove(activity);
 
-            activity.Received().Execute();
-            activity2.Received().Execute();
-
+            Assert.AreEqual(1, workflow.GetActivities().Count());
         }
     }
 }

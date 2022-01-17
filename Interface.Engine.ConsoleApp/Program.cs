@@ -8,10 +8,13 @@ namespace Interface.Engine.ConsoleApp
         static void Main(string[] args)
         {
             var workflow = new Workflow();
-            workflow.RegisterActivity(new EmailActivity());
-            workflow.RegisterActivity(new UploadVideoActivity());
-            workflow.RegisterActivity(new WebServiceActivity());
-            workflow.Run();
+            var engine = new WorkFlowEngine();
+
+            workflow.Add(new EmailActivity());
+            workflow.Add(new UploadVideoActivity());
+            workflow.Add(new WebServiceActivity());
+
+            engine.Run(workflow);
         }
     }
 }
