@@ -26,6 +26,8 @@ namespace Stopwatch
 
         public void Stop()
         {
+            if (!_stopWatch.IsRunning)
+                throw new InvalidOperationException($"{nameof(Start)}: Stopwatch is not running");
             _stopWatch.Stop();
             _totalDuration += _stopWatch.Elapsed;
         }
